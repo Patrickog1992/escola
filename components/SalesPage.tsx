@@ -16,6 +16,8 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
   // Notification State
   const [notification, setNotification] = useState({ visible: false, name: '', city: '' });
 
+  const CHECKOUT_LINK = "https://go.perfectpay.com.br/PPU38CQ5PQR";
+
   // Countdown Logic
   useEffect(() => {
     const timer = setInterval(() => {
@@ -95,6 +97,10 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const handleCheckout = () => {
+    window.location.href = CHECKOUT_LINK;
   };
 
   const appExplanations = [
@@ -484,7 +490,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
                 <p className="text-xl font-bold text-slate-800 mb-2">💰 Valor total dos bônus: <span className="line-through text-slate-400">R$ 475</span></p>
                 <p className="text-lg mb-4">👉 Ao se inscrever na Escola de Oração hoje, você recebe TODOS esses bônus 100% GRATUITOS.</p>
                 <p className="text-sm mb-4">Mas apenas hoje, até às 23:59 ou enquanto durarem as 5 últimas vagas, você garante acesso por apenas <span className="text-5xl font-extrabold text-emerald-600 block my-4">R$ 47</span> com mais de 90% de DESCONTO 👇</p>
-                <PulsingButton className="w-full text-lg">QUERO MINHA VAGA AGORA</PulsingButton>
+                <PulsingButton className="w-full text-lg" onClick={handleCheckout}>QUERO MINHA VAGA AGORA</PulsingButton>
             </div>
             
             <p className="text-center text-slate-500 italic">Imagine se daqui 4 semanas você olha no espelho e mal se reconhece... Só porque decidiu começar HOJE.</p>
@@ -498,7 +504,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
             <p className="mb-4">Você tem 30 dias completos para colocar a Escola de Oração em prática. Se, por qualquer motivo, você não sentir mais paz, clareza ou progresso financeiro, basta enviar um e-mail ou WhatsApp que devolvemos 100% do seu dinheiro.</p>
             <p className="mb-4 font-bold">💰 Sem riscos, sem burocracia, sem letras miúdas.</p>
             <p className="mb-6">🎯 É simples: ou você começa a ver sua vida financeira e espiritual destravar, ou não paga absolutamente nada.</p>
-            <PulsingButton className="w-full">COMEÇAR AGORA</PulsingButton>
+            <PulsingButton className="w-full" onClick={handleCheckout}>COMEÇAR AGORA</PulsingButton>
           </div>
       </section>
 
@@ -517,7 +523,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
                  </div>
              </div>
              <div className="mt-8 text-center">
-                 <PulsingButton className="w-full text-xl py-4">ENTRAR NA ACADEMIA DE ORAÇÃO</PulsingButton>
+                 <PulsingButton className="w-full text-xl py-4" onClick={handleCheckout}>ENTRAR NA ACADEMIA DE ORAÇÃO</PulsingButton>
              </div>
           </div>
       </section>
