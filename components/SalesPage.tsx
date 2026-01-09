@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { QuizState } from '../types';
-import { Check, ChevronDown, ChevronUp, Star, Lock, BookOpen, BarChart2, MessageCircle, Home, User, BatteryCharging, Heart, Sun } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Star, Lock, BookOpen, BarChart2, MessageCircle, Home, User, BatteryCharging, Heart, Sun, MapPin } from 'lucide-react';
 
 interface SalesPageProps {
   answers: QuizState;
@@ -12,6 +12,9 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  
+  // Notification State
+  const [notification, setNotification] = useState({ visible: false, name: '', city: '' });
 
   // Countdown Logic
   useEffect(() => {
@@ -19,6 +22,41 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Social Proof Popup Logic
+  useEffect(() => {
+    const buyers = [
+      { name: "Mariana S.", city: "São Paulo" },
+      { name: "Carlos A.", city: "Rio de Janeiro" },
+      { name: "Fernanda M.", city: "Curitiba" },
+      { name: "João P.", city: "Salvador" },
+      { name: "Ana L.", city: "Belo Horizonte" },
+      { name: "Ricardo O.", city: "Porto Alegre" },
+      { name: "Patrícia G.", city: "Brasília" },
+      { name: "Roberto F.", city: "Recife" }
+    ];
+
+    const showBuyer = () => {
+      const randomBuyer = buyers[Math.floor(Math.random() * buyers.length)];
+      setNotification({ visible: true, name: randomBuyer.name, city: randomBuyer.city });
+      
+      // Hide after 4 seconds
+      setTimeout(() => {
+        setNotification(prev => ({ ...prev, visible: false }));
+      }, 4000);
+    };
+
+    // Initial delay
+    const initialTimeout = setTimeout(showBuyer, 2000);
+
+    // Loop every 8 seconds
+    const interval = setInterval(showBuyer, 8000);
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
   }, []);
 
   const formatTime = (seconds: number) => {
@@ -107,9 +145,35 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
     }
   ];
 
+  const PulsingButton = ({ children, className = "", ...props }: any) => (
+    <Button 
+      className={`!bg-green-600 hover:!bg-green-500 !text-white !font-extrabold animate-pulse shadow-[0_0_20px_rgba(22,163,74,0.6)] !border-none transition-all transform hover:scale-105 ${className}`}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800">
       
+      {/* Social Proof Popup - Micro Version */}
+      <div 
+        className={`fixed top-2 right-2 z-50 bg-white/95 backdrop-blur-sm shadow-md border-l-2 border-green-500 rounded p-1.5 max-w-[140px] transition-all duration-500 transform ${notification.visible ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'}`}
+      >
+        <div className="flex items-start gap-1.5">
+            <div className="bg-green-100 p-0.5 rounded-full mt-0.5">
+                <Check size={8} className="text-green-600" />
+            </div>
+            <div>
+                <p className="text-[7px] uppercase tracking-wider text-slate-400 font-bold mb-0 leading-none">Nova Inscrição</p>
+                <p className="text-[8px] text-slate-800 leading-tight mt-0.5">
+                    <span className="font-bold">{notification.name}</span> de <span className="font-semibold text-slate-600">{notification.city}</span> recebeu a <span className="font-bold text-green-700">ESCOLA DE ORAÇÃO</span>
+                </p>
+            </div>
+        </div>
+      </div>
+
       {/* Static Banner - Not Fixed */}
       <div className="w-full bg-red-600 text-white py-3 px-2 text-center shadow-md">
         <p className="text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
@@ -420,7 +484,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
                 <p className="text-xl font-bold text-slate-800 mb-2">💰 Valor total dos bônus: <span className="line-through text-slate-400">R$ 475</span></p>
                 <p className="text-lg mb-4">👉 Ao se inscrever na Escola de Oração hoje, você recebe TODOS esses bônus 100% GRATUITOS.</p>
                 <p className="text-sm mb-4">Mas apenas hoje, até às 23:59 ou enquanto durarem as 5 últimas vagas, você garante acesso por apenas <span className="text-5xl font-extrabold text-emerald-600 block my-4">R$ 47</span> com mais de 90% de DESCONTO 👇</p>
-                <Button className="w-full text-lg shadow-xl shadow-emerald-200 !bg-emerald-600 animate-pulse">QUERO MINHA VAGA AGORA</Button>
+                <PulsingButton className="w-full text-lg">QUERO MINHA VAGA AGORA</PulsingButton>
             </div>
             
             <p className="text-center text-slate-500 italic">Imagine se daqui 4 semanas você olha no espelho e mal se reconhece... Só porque decidiu começar HOJE.</p>
@@ -434,7 +498,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
             <p className="mb-4">Você tem 30 dias completos para colocar a Escola de Oração em prática. Se, por qualquer motivo, você não sentir mais paz, clareza ou progresso financeiro, basta enviar um e-mail ou WhatsApp que devolvemos 100% do seu dinheiro.</p>
             <p className="mb-4 font-bold">💰 Sem riscos, sem burocracia, sem letras miúdas.</p>
             <p className="mb-6">🎯 É simples: ou você começa a ver sua vida financeira e espiritual destravar, ou não paga absolutamente nada.</p>
-            <Button className="w-full">COMEÇAR AGORA</Button>
+            <PulsingButton className="w-full">COMEÇAR AGORA</PulsingButton>
           </div>
       </section>
 
@@ -453,7 +517,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
                  </div>
              </div>
              <div className="mt-8 text-center">
-                 <Button className="w-full text-xl py-4 !bg-emerald-600">ENTRAR NA ACADEMIA DE ORAÇÃO</Button>
+                 <PulsingButton className="w-full text-xl py-4">ENTRAR NA ACADEMIA DE ORAÇÃO</PulsingButton>
              </div>
           </div>
       </section>

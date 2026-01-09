@@ -1,7 +1,7 @@
 import React from 'react';
 import { StepLayout } from './StepLayout';
 import { Button } from './Button';
-import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip, ReferenceDot, Label } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip, ReferenceDot, Label, ReferenceLine } from 'recharts';
 
 interface GraphScreenProps {
   onNext: () => void;
@@ -53,12 +53,15 @@ export const GraphScreen: React.FC<GraphScreenProps> = ({ onNext }) => {
                 fill="url(#colorValue)" 
                 strokeWidth={3}
               />
+              {/* Linha de Objetivo no Topo */}
+              <ReferenceLine y={100} stroke="#10B981" strokeDasharray="3 3" strokeOpacity={0.5}>
+                <Label value="OBJETIVO" position="insideTop" fill="#10B981" fontSize={12} fontWeight="800" offset={-10} />
+              </ReferenceLine>
+
               <ReferenceDot x={0} y={10} r={6} fill="#EF4444" stroke="white" strokeWidth={2}>
                  <Label value="AGORA" offset={15} position="top" fill="#EF4444" fontSize={11} fontWeight="bold" />
               </ReferenceDot>
-              <ReferenceDot x={28} y={100} r={6} fill="#10B981" stroke="white" strokeWidth={2}>
-                 <Label value="OBJETIVO" offset={15} position="top" fill="#10B981" fontSize={11} fontWeight="bold" />
-              </ReferenceDot>
+              <ReferenceDot x={28} y={100} r={6} fill="#10B981" stroke="white" strokeWidth={2} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
