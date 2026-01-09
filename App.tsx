@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StepLayout } from './components/StepLayout';
 import { Button } from './components/Button';
 import { LoadingScreen } from './components/LoadingScreen';
@@ -8,9 +8,48 @@ import { SalesPage } from './components/SalesPage';
 import { INITIAL_STATE, QuizState } from './types';
 import { Briefcase, Heart, Globe, Scale, Users, HelpCircle, DollarSign, TrendingUp, Rocket, AlertTriangle, BatteryCharging, ShoppingBag, Wrench, BarChart2, Bell, Sun, Clock, BookOpen, PenTool, Smartphone, Monitor, Shield, Home } from 'lucide-react';
 
+// List of critical images to preload
+const IMAGES_TO_PRELOAD = [
+  "https://i.imgur.com/uLaG7j9.jpeg",
+  "https://assets.fnlfx.com/01JJYMQ9ZT5P1Y7DQVTY4P34ZA/EdTysa.webp",
+  "https://assets.fnlfx.com/01KBF5MF5T1HGK82GH28F03S90/2ahRVR6z.webp",
+  "https://assets.fnlfx.com/01JNRNK8RG99WV2EDA87Y0H0E0/AR8ncc.webp",
+  "https://assets.fnlfx.com/01JNRNK8RG99WV2EDA87Y0H0E0/28eC85.webp",
+  "https://assets.fnlfx.com/01JNRNK8RG99WV2EDA87Y0H0E0/tKwNE_.webp",
+  "https://assets.fnlfx.com/01JNRNK8RG99WV2EDA87Y0H0E0/GmRO7D.webp",
+  "https://i.imgur.com/Sza1ZfT.png",
+  "https://i.imgur.com/NVXnmUf.jpg",
+  "https://i.imgur.com/cGzrRGs.jpg",
+  "https://i.imgur.com/Uxfn3tt.jpg",
+  "https://assets.fnlfx.com/01JNRNK8RG99WV2EDA87Y0H0E0/5DicJu.webp",
+  "https://assets.fnlfx.com/01JNRNK8RG99WV2EDA87Y0H0E0/jkBJKh.webp",
+  "https://assets.fnlfx.com/01JJYMQ9ZT5P1Y7DQVTY4P34ZA/Lrn2ex.webp"
+];
+
 const App = () => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<QuizState>(INITIAL_STATE);
+
+  // Preload Images on Mount
+  useEffect(() => {
+    IMAGES_TO_PRELOAD.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
+  // Handle Scroll on Step Change - Force top immediately
+  useEffect(() => {
+    // Force immediate scroll to top
+    window.scrollTo(0, 0);
+    
+    // Safety timeout for mobile browsers that might have layout shifts
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+    
+    return () => clearTimeout(timer);
+  }, [step]);
 
   const nextStep = () => {
     window.scrollTo(0, 0);
