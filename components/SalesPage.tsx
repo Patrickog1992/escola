@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { QuizState } from '../types';
-import { Check, ChevronDown, ChevronUp, Star, Lock, BookOpen, BarChart2, MessageCircle, Home, User, BatteryCharging, Heart, Sun, MapPin } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Star, Lock, BookOpen, BarChart2, MessageCircle, Home, User, BatteryCharging, Heart, Sun, MapPin, ThumbsUp } from 'lucide-react';
 
 interface SalesPageProps {
   answers: QuizState;
@@ -113,22 +113,30 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
     {
       img: "https://i.imgur.com/Sza1ZfT.png",
       name: "Maria S.",
-      text: "Minha vida financeira estava um caos total. Dívidas acumuladas, nome sujo e sem esperança. A Escola de Oração me deu o passo a passo espiritual e prático. Hoje durmo em paz."
+      text: "Minha vida financeira estava um caos total. Dívidas acumuladas, nome sujo e sem esperança. A Escola de Oração me deu o passo a passo espiritual e prático. Hoje durmo em paz.",
+      likes: 142,
+      loves: 34
     },
     {
       img: "https://i.imgur.com/NVXnmUf.jpg",
       name: "Ana C.",
-      text: "Eu achava que prosperidade era pecado. Descobri que Deus quer que eu cresça. Tripliquei minha renda aplicando os princípios ensinados aqui em apenas 3 meses."
+      text: "Eu achava que prosperidade era pecado. Descobri que Deus quer que eu cresça. Tripliquei minha renda aplicando os princípios ensinados aqui em apenas 3 meses.",
+      likes: 89,
+      loves: 56
     },
     {
       img: "https://i.imgur.com/cGzrRGs.jpg",
       name: "João P.",
-      text: "Homem de pouca fé e muitas contas, esse era eu. O Pastor Coach abriu meus olhos. A organização financeira somada à oração diária salvou meu casamento."
+      text: "Homem de pouca fé e muitas contas, esse era eu. O Pastor Coach abriu meus olhos. A organização financeira somada à oração diária salvou meu casamento.",
+      likes: 215,
+      loves: 98
     },
     {
       img: "https://i.imgur.com/Uxfn3tt.jpg",
       name: "Carlos M.",
-      text: "Simplesmente transformador. O valor é irrisório perto do que entregam. As ferramentas de controle emocional me impediram de gastar por impulso."
+      text: "Simplesmente transformador. O valor é irrisório perto do que entregam. As ferramentas de controle emocional me impediram de gastar por impulso.",
+      likes: 176,
+      loves: 42
     }
   ];
 
@@ -387,41 +395,72 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
 
       </section>
 
-      {/* Testimonials Carousel */}
-      <section className="bg-slate-900 text-white py-12 px-4">
-        <div className="max-w-2xl mx-auto">
-             <h2 className="text-2xl font-bold text-center mb-8">O QUE OS FIÉIS DIZEM SOBRE A ESCOLA</h2>
+      {/* Testimonials Carousel (Refined) */}
+      <section className="bg-slate-900 text-white py-16 px-4">
+        <div className="max-w-xl mx-auto">
+             <h2 className="text-2xl font-bold text-center mb-2">A COMUNIDADE DA FÉ</h2>
+             <p className="text-center text-slate-400 text-sm mb-10">Veja o que os membros estão compartilhando</p>
              
-             <div className="relative min-h-[300px] flex items-center justify-center">
+             <div className="relative min-h-[380px] sm:min-h-[340px]">
                  {testimonials.map((t, index) => (
                     <div 
                         key={index} 
-                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex flex-col items-center justify-center text-center p-6 bg-slate-800 rounded-2xl border border-slate-700 shadow-xl ${index === currentTestimonial ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                        className={`absolute inset-0 transition-all duration-500 ease-in-out transform ${index === currentTestimonial ? 'opacity-100 translate-x-0 z-10' : 'opacity-0 translate-x-8 z-0 pointer-events-none'}`}
                     >
-                        <img 
-                            src={t.img} 
-                            alt={t.name} 
-                            className="w-24 h-24 rounded-full border-4 border-accent mb-4 object-cover"
-                        />
-                        <h3 className="text-xl font-bold text-white mb-2">{t.name}</h3>
-                        <div className="flex text-yellow-400 mb-4 justify-center">
-                            <Sun size={20} fill="currentColor" />
-                            <Sun size={20} fill="currentColor" />
-                            <Sun size={20} fill="currentColor" />
-                            <Sun size={20} fill="currentColor" />
-                            <Sun size={20} fill="currentColor" />
+                        {/* Social Post Card Style */}
+                        <div className="bg-white rounded-2xl p-6 shadow-2xl text-slate-800 border-2 border-slate-100">
+                            {/* Header */}
+                            <div className="flex items-start gap-4 mb-4">
+                                <div className="relative">
+                                    <img 
+                                        src={t.img} 
+                                        alt={t.name} 
+                                        className="w-14 h-14 rounded-full object-cover border-2 border-slate-100"
+                                    />
+                                    <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-0.5 border-2 border-white">
+                                        <Check size={10} color="white" strokeWidth={4} />
+                                    </div>
+                                </div>
+                                <div className="flex-1">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <h3 className="font-bold text-lg leading-tight">{t.name}</h3>
+                                            <p className="text-xs text-slate-400">Membro Verificado • 2h atrás</p>
+                                        </div>
+                                        <div className="flex text-amber-400 gap-0.5">
+                                            {[1,2,3,4,5].map(s => <Sun key={s} size={14} fill="currentColor" />)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Body */}
+                            <p className="text-slate-600 text-[15px] leading-relaxed mb-6 font-medium">
+                                "{t.text}"
+                            </p>
+
+                            {/* Footer / Social Actions */}
+                            <div className="border-t border-slate-100 pt-4 flex items-center justify-between">
+                                <div className="flex gap-4">
+                                    <button className="flex items-center gap-1.5 text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-full transition-colors font-semibold text-sm">
+                                        <ThumbsUp size={18} fill="currentColor" className="text-blue-600" />
+                                        <span>{t.likes} Curtidas</span>
+                                    </button>
+                                    <button className="flex items-center gap-1.5 text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-full transition-colors font-semibold text-sm">
+                                        <Heart size={18} fill="currentColor" className="text-red-500" />
+                                        <span>{t.loves} Amei</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <p className="italic text-slate-300 text-lg leading-relaxed">
-                            "{t.text}"
-                        </p>
                     </div>
                  ))}
              </div>
              
              {/* Indicators for Testimonials */}
-             <div className="flex justify-center gap-2 mt-8">
+             <div className="flex justify-center gap-2 mt-4">
                  {testimonials.map((_, idx) => (
-                     <div key={idx} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'bg-accent scale-125' : 'bg-slate-700'}`}></div>
+                     <div key={idx} className={`h-1.5 rounded-full transition-all duration-300 ${currentTestimonial === idx ? 'w-8 bg-white' : 'w-2 bg-slate-700'}`}></div>
                  ))}
              </div>
         </div>
