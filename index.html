@@ -3,12 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Academia de Orações</title>
     
-    <!-- Preload Critical Images -->
+    <!-- Preload Critical Images (Immediate Loading) -->
     <link rel="preload" as="image" href="https://i.imgur.com/oTDYdgG.png">
     <link rel="preload" as="image" href="https://i.imgur.com/uLaG7j9.jpeg">
+    <!-- SalesPage Critical Images -->
+    <link rel="preload" as="image" href="https://i.imgur.com/qTALPdf.jpeg">
+    <link rel="preload" as="image" href="https://i.imgur.com/rcOkmPA.jpeg">
+    <link rel="preload" as="image" href="https://i.imgur.com/Sza1ZfT.png">
+    <link rel="preload" as="image" href="https://i.imgur.com/NVXnmUf.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +64,7 @@ fbq('track', 'PageView');
 }
 </script>
 </head>
-  <body>
+  <body class="overflow-x-hidden bg-slate-50">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

@@ -161,7 +161,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
 
   const PulsingButton = ({ children, className = "", ...props }: any) => (
     <Button 
-      className={`!bg-green-600 hover:!bg-green-500 !text-white !font-extrabold animate-pulse shadow-[0_0_20px_rgba(22,163,74,0.6)] !border-none transition-all transform hover:scale-105 ${className}`}
+      className={`!bg-green-600 hover:!bg-green-500 !text-white !font-extrabold animate-pulse shadow-[0_0_20px_rgba(22,163,74,0.6)] !border-none transition-all transform md:hover:scale-105 ${className}`}
       {...props}
     >
       {children}
@@ -169,7 +169,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
   );
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-800">
+    <div className="min-h-screen bg-white font-sans text-slate-800 overflow-x-hidden w-full max-w-[100vw]">
       
       {/* Social Proof Popup - Micro Version */}
       <div 
@@ -209,7 +209,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
         
         <div className="bg-red-50 border border-red-100 rounded-2xl p-6 shadow-sm">
           <h3 className="text-red-600 font-bold text-xl mb-4 flex items-center gap-2">ANTES DA ESCOLA DE ORAÇÃO</h3>
-          <img src="https://i.imgur.com/qTALPdf.jpeg" alt="Antes" className="w-full h-auto rounded-xl mb-6 opacity-80 grayscale" />
+          <img src="https://i.imgur.com/qTALPdf.jpeg" alt="Antes" className="w-full h-auto rounded-xl mb-6 opacity-80 grayscale" loading="eager" />
           <ul className="space-y-3">
             <li className="flex gap-2 items-start"><span className="text-red-500">✕</span> Muito esforço. Pouco resultado.</li>
             <li className="flex gap-2 items-start"><span className="text-red-500">✕</span> Estresse financeiro todos os dias.</li>
@@ -219,9 +219,9 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
           </ul>
         </div>
 
-        <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-6 shadow-lg transform scale-105">
+        <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-6 shadow-lg transform md:scale-105">
           <h3 className="text-emerald-600 font-bold text-xl mb-4 flex items-center gap-2">DEPOIS DA ESCOLA DE ORAÇÃO</h3>
-          <img src="https://i.imgur.com/rcOkmPA.jpeg" alt="Depois" className="w-full h-auto rounded-xl mb-6" />
+          <img src="https://i.imgur.com/rcOkmPA.jpeg" alt="Depois" className="w-full h-auto rounded-xl mb-6" loading="eager" />
           <ul className="space-y-3">
             <li className="flex gap-2 items-start"><Check className="text-emerald-500 w-5 h-5" /> Clareza, paz e crescimento constante.</li>
             <li className="flex gap-2 items-start"><Check className="text-emerald-500 w-5 h-5" /> Prosperidade com propósito.</li>
@@ -397,11 +397,11 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
 
       {/* Testimonials Carousel (Refined) */}
       <section className="bg-slate-900 text-white py-16 px-4">
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-xl mx-auto relative">
              <h2 className="text-2xl font-bold text-center mb-2">A COMUNIDADE DA FÉ</h2>
              <p className="text-center text-slate-400 text-sm mb-10">Veja o que os membros estão compartilhando</p>
              
-             <div className="relative min-h-[380px] sm:min-h-[340px]">
+             <div className="relative min-h-[380px] sm:min-h-[340px] overflow-hidden">
                  {testimonials.map((t, index) => (
                     <div 
                         key={index} 
@@ -556,7 +556,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ answers }) => {
                      <h4 className="font-bold text-slate-500 mb-2">🔸 1. Continuar preso(a) ao estresse financeiro</h4>
                      <p className="text-sm">tentando “dar um jeito” sozinho(a), repetindo os mesmos erros, vivendo no aperto e sentindo que nada muda.</p>
                  </div>
-                 <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-primary transform scale-105">
+                 <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-primary transform md:scale-105">
                      <h4 className="font-bold text-primary mb-2">🔹 2. Começar hoje com a Escola de Oração</h4>
                      <p className="text-sm">usando um método simples e acessível, que já ajudou milhares de pessoas a destravar a vida financeira e encontrar paz, dedicando apenas alguns minutos por dia, sem complicação.</p>
                  </div>
