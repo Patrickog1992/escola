@@ -78,7 +78,7 @@ const App = () => {
         return (
           <StepLayout>
             <h1 className="text-xl font-bold mb-2">Desafio de PROSPERIDADE de Deus em 28 dias</h1>
-            <h2 className="text-2xl font-extrabold mb-6 text-primary">Tornar-se financeiramente irreconhecível<br />em 2026.</h2>
+            <h2 className="text-2xl font-extrabold mb-6 text-primary">Receba o milagre para tornar-se financeiramente irreconhecível<br />em 2026.</h2>
             <img src="https://i.imgur.com/uLaG7j9.jpeg" alt="Desafio Financeiro" className="w-full rounded-xl mb-6 shadow-md" />
             <p className="mb-4 font-semibold">Selecione seu gênero</p>
             <p className="text-sm text-slate-500 mb-6">Usamos sua idade apenas para personalizar seu plano.</p>
